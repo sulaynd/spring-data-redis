@@ -11,8 +11,14 @@ import java.util.List;
 public class ProductDao {
 
     public static final String HASH_KEY = "Product";
-    @Autowired
-    private RedisTemplate template;
+
+
+    //@Autowired
+    private final RedisTemplate template;
+
+    public ProductDao(RedisTemplate template) {
+        this.template = template;
+    }
 
     public Product save(Product product){
         template.opsForHash().put(HASH_KEY,product.getId(),product);
